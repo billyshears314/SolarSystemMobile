@@ -1,0 +1,93 @@
+<html>
+
+<head>
+
+</head>
+
+<body>
+
+<canvas id="ex1" width=800 height=1280 style="background-color:#222"></canvas>
+
+</body>
+
+
+<script>
+var t = 0; 
+var x;
+var y;
+
+var x2;
+var y2;
+
+var x3=400;
+var y3=400;
+
+var speed = 0.4;
+
+
+    
+    
+
+function animate() {
+
+    reqAnimFrame = window.mozRequestAnimationFrame    ||
+                window.webkitRequestAnimationFrame ||
+                window.msRequestAnimationFrame     ||
+                window.oRequestAnimationFrame
+                ;
+
+    reqAnimFrame(animate);
+
+   t+= speed;
+    
+	x = 400 + (250 * Math.cos(DegreesToRadians(t)));
+	y = 400 + (250 * Math.sin(DegreesToRadians(t)));
+	
+	x2 = 400 + (250 * Math.cos(DegreesToRadians(t)))+(100*Math.cos(DegreesToRadians(t*360/30)));
+	y2 = 400 + (250 * Math.sin(DegreesToRadians(t)))+(100*Math.sin(DegreesToRadians(t*360/30)));
+
+    
+	if(t>360){
+		t-=360;	
+	}
+    draw();
+
+}
+
+
+function draw() {
+    var canvas  = document.getElementById("ex1");
+    var context = canvas.getContext("2d");
+
+    context.clearRect(0, 0, 800, 1280);
+    
+    context.beginPath();
+    context.arc(x3, y3, 100, 0, 2 * Math.PI);
+    context.fillStyle = 'yellow';
+    context.fill();
+    context.stroke();
+    
+    context.beginPath();
+    context.arc(x, y, 50, 0, 2 * Math.PI);
+    context.fillStyle = 'blue';
+    context.fill();
+    context.stroke();
+    
+    context.beginPath();
+    context.arc(x2, y2, 20, 0, 2 * Math.PI);
+    context.fillStyle = 'gray';
+    context.fill();
+    context.stroke();
+}
+
+animate();
+
+function DegreesToRadians(x){
+
+	return x*Math.PI/180;
+
+}
+
+</script>
+
+</html>
